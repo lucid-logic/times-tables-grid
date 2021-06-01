@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pippas Multiplication App</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jost:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/vue@next" defer></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <section id="timesTableApp">
+      <table><tr><td>
+    <header>
+      <h1>Pippa's Multiplication App</h1>
+    </header>
+      <div class="answerSection">
+      <section v-if="gameStarted">
+      <p style="margin: 0px">{{ questionText }}</p>
+        <section v-if="lastGameResult==''">
+          <table width=100%><tr><td style="text-align: right;">
+          <input v-model="suppliedAnswer" @keyup.enter="submitAnswer" @change="focusInput" class="answerTextBox" ref="answerTextBox" style="margin: 1rem">
+          </td><td style="text-align: left">
+          <button @click="submitAnswer" class ="answerButton" style="margin: 1rem;">Go!</button>
+        </td></tr></table>
+        </section>
+      </section>
+      </div>
+      <section style="width:450px; text-align: center; margin: 3rem;" >
+        <button @click="startButtonClick" ref="startButton" style="margin: 1rem;">{{ startButtonText }}</button><br>
+        <div style="height: 60px;"> 
+           <p v-if="!gameStarted" style="margin: 0px;">Select columns to activate/deactivate</p>
+
+      </div>
+      </section>
+      </td><td>
+        <table border=1>
+          <tr><td v-for= "num in 12" class="numberBox" @click="toggleMultiplier(num)" :class="resultClass(num)">{{ num }}</td></tr>
+          <tr v-for="a in 12" class="numberBox"><td v-for= "num in 12" :class="resultClass(num,a)"></td></tr>
+
+      </table>
+      </td></tr></table>
+    </section>
+  </body>
+</html>
