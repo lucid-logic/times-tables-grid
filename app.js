@@ -1,7 +1,7 @@
 const app = Vue.createApp({
     data(){
         return {
-            multiplierSelected: [],
+            multiplierSelected: [false,false,true,true,true,true,true,true,true,true,false,true,true],
             questionArray: [],
             gameStarted: false,
             answerResult: [],
@@ -35,7 +35,10 @@ const app = Vue.createApp({
             }
 
         },
-
+        checkAnswerInput(){
+            this.suppliedAnswer = this.suppliedAnswer.replace(/\D/g,'');
+            console.log(this.suppliedAnswer);
+        },
         resultClass(column,row){
             
             if(this.answerResult[column+"-"+row]===true){
@@ -52,6 +55,7 @@ const app = Vue.createApp({
         },
         toggleMultiplier(multiplier){
             if(this.gameStarted){
+                alert("Cannot activate/deactivate column once game has started. Click 'Reset the Game' to restart");
                 return;
             }
             if(this.multiplierSelected[multiplier]===false){
